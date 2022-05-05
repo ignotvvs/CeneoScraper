@@ -2,7 +2,9 @@ import requests
 from bs4 import BeautifulSoup
 import json
 
-url = "https://www.ceneo.pl/113706425#tab=reviews"
+productId = input("Enter product id: ")
+
+url = f"https://www.ceneo.pl/{productId}#tab=reviews"
 all_opinions = []
 while(url):        
     response = requests.get(url)
@@ -50,5 +52,5 @@ while(url):
     except TypeError:
         url = None
 
-with open("opinions/113706425.json", "w", encoding="UTF-8") as jfk:
+with open(f"opinions/{productId}.json", "w", encoding="UTF-8") as jfk:
     json.dump(all_opinions, jfk, indent=4, ensure_ascii=False)
